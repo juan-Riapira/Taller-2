@@ -9,13 +9,16 @@ public class ServiceSale {
 /**
  * Metodo Constructor de la Clase ServiceSale
  * @param product
- * @param cant
+ * @param cant cantidad de la venta 
  */
-	public  ServiceSale(Product product, int cant) {
+	public  ServiceSale(Product product, int cant)throws Exception {
 		
-		sale = new Sale(cant,product);
-		
-	}
+	
+		if (cant > product.getStock() ) {
+			throw new Exception ("productos insuficientes");
+		}
+	sale = new Sale(cant,product);
+	}		
 /**
  * Esteblece la venta
  * @param sale

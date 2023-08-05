@@ -15,6 +15,7 @@ public class Runner {
 	 * metodo contructor de la clase Runner
 	 */
 	public Runner() {
+		
 		presenter = new Presenter();
 	}
 
@@ -46,11 +47,11 @@ public class Runner {
 			case 1:
 				System.out.println(
 						"PRODUCTOS DISPONIBLES \n" + 
-				                   "1 .NOMBRE :jabon        VALOR: 1000 ,IVA TRUE , TIPO DE PRODUCTO ASEO");
-				System.out.println("2 .NOMBRE :arroz        VALOR: 2000 ,IVA TRUE ,  TIPO DE PRODUCTO  VIVERES");
-				System.out.println("3 .NOMBRE :acetaminofen VALOR: 1000 ,IVA false , TIPO DE PRODUCTO  MEDICINAS");
-				System.out.println("4 .NOMBRE :mani         VALOR: 1000 ,IVA TRUE ,  TIPO DE PRODUCTO  RANCHO");
-				System.out.println("5 .NOMBRE :whisky       VALOR: 1000 ,IVA TRUE ,  TIPO DE PRODUCTO  LICORES");
+				                   "1 .NOMBRE :jabon        VALOR: 1000  CANTIDAD: 10 ,IVA TRUE  , TIPO DE PRODUCTO ASEO");
+				System.out.println("2 .NOMBRE :arroz        VALOR: 2000  CANTIDAD: 15 ,IVA TRUE  ,  TIPO DE PRODUCTO  VIVERES");
+				System.out.println("3 .NOMBRE :acetaminofen VALOR: 2500  CANTIDAD: 11 ,IVA false , TIPO DE PRODUCTO  MEDICINAS");
+				System.out.println("4 .NOMBRE :mani         VALOR: 3000  CANTIDAD: 3  ,IVA TRUE  ,  TIPO DE PRODUCTO  RANCHO");
+				System.out.println("5 .NOMBRE :whisky       VALOR: 3500  CANTIDAD: 5  ,IVA TRUE  ,  TIPO DE PRODUCTO  LICORES");
 				System.out.println("");
 
 				System.out.println("Ingrese nombre");
@@ -61,6 +62,7 @@ public class Runner {
 			        try {
 			        	 System.out.println("Ingrese cantidad de compra");
 			        	    stock = sc.nextInt();
+			        	    
 			        } catch (InputMismatchException ex) {
 			            System.out.println("Error: Ingrese una opción válida!!");
 			            sc.next();
@@ -79,7 +81,15 @@ public class Runner {
 			        }
 			    } while (stock <= 0);
 				
-				double total = runner.presenter.addSale(nombre, 0, stock, true, ETypeProduct.valueOf(typeProduct));
+				double total=0.0;
+				try {
+					total = runner.presenter.addSale(nombre, 0, stock, true, ETypeProduct.valueOf(typeProduct));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("productos insuficientes");
+					System.out.println("cerrando programa..");
+					System.exit(0);
+				}
 
 				System.out.println("Total de la venta: " + total);
 
